@@ -1,4 +1,5 @@
 /// <reference types="../canary"/>
+import React = require("react");
 import ReactDOM = require("react-dom");
 import ReactDOMClient = require("react-dom/client");
 
@@ -7,6 +8,7 @@ function preloadTest() {
         ReactDOM.preload("foo", { as: "style", fetchPriority: "high", integrity: "sad" });
         ReactDOM.preload("bar", {
             as: "font",
+            type: "font/woff2",
             // @ts-expect-error Unknown fetch priority
             fetchPriority: "unknown",
         });
@@ -166,6 +168,17 @@ function formTest() {
             Promise.resolve(0),
         )[0];
 
+        useFormState(
+            async (state: React.ReactNode, payload: FormData): Promise<React.ReactNode> => {
+                return state;
+            },
+            (
+                <button>
+                    New Project
+                </button>
+            ),
+        );
+
         return (
             <button
                 onClick={() => {
@@ -239,4 +252,9 @@ function formTest() {
 
     const formState = [1, "", "", 0] as unknown as ReactDOMClient.ReactFormState;
     ReactDOMClient.hydrateRoot(document.body, <Page1 />, { formState });
+}
+
+function createRoot(validContainer: Element | DocumentFragment | Document) {
+    ReactDOMClient.createRoot(document);
+    ReactDOMClient.createRoot(validContainer);
 }
