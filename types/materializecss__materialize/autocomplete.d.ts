@@ -31,7 +31,7 @@ declare namespace M {
          * Select a specific autocomplete options.
          * @param el Element of the autocomplete option.
          */
-        selectOption(el: Element): void;
+        selectOption(el: string): void;
 
         /**
          * Update autocomplete options data.
@@ -58,6 +58,26 @@ declare namespace M {
          * Instance of the dropdown plugin for this autocomplete.
          */
         dropdown: Dropdown;
+
+        /**
+         *  Set possible dropdown Menu items
+         */
+        setMenuItems(data: Array<AutocompleteData>): void;
+
+        /**
+         * Menu items.
+         */
+        menuItems: Array<AutocompleteData>;
+
+        /**
+         * resets the autocomplete instance.
+         */
+        _resetAutocomplete(): void;
+
+        /**
+         * creates and attaches the dropdown elements.
+         */
+        _renderDropdown(): void;
     }
 
     interface AutocompleteData {
@@ -69,7 +89,7 @@ declare namespace M {
          * Data object defining autocomplete options with
          * optional icon strings.
          */
-        data: AutocompleteData;
+        data: Array<AutocompleteData>;
 
         /**
          * Limit of results the autocomplete shows.

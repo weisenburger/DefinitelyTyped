@@ -53,6 +53,11 @@ declare namespace M {
          * Get selected values in an array.
          */
         getSelectedValues(): string[];
+
+        /**
+         * Handle a selection change.
+         */
+        _handleSelectChange(): void;
     }
 
     interface FormSelectOptions {
